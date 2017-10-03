@@ -9,20 +9,17 @@
 // ----------------------------------------------------------------------------
 #ifndef NEWHAVEN_DISPLAY_H
 #define NEWHAVEN_DISPLAY_H
-#if defined(ARDUINO) && ARDUINO >= 100
-#include "Arduino.h"
-#else
-#include "WProgram.h"
-#endif
+#include <Arduino.h>
 #include <Stream.h>
 #include <HardwareSerial.h>
-#include "Streaming.h"
-#include "BetterMap.h"
+#include <Streaming.h>
+#include <BetterMap.h>
+
 
 class NewhavenDisplay {
  public:
   NewhavenDisplay(HardwareSerial &serial);
-  NewhavenDisplay(HardwareSerial &serial, const int row_count, const int col_count);
+  NewhavenDisplay(HardwareSerial &serial, const size_t row_count, const size_t col_count);
   void setSerial(HardwareSerial &serial);
   void setup();
   template<typename T>
@@ -31,17 +28,17 @@ class NewhavenDisplay {
     serial_ptr_->print(value);
   }
   template<typename T>
-  void printPadLeft(const T value, const int total_length)
+  void printPadLeft(const T value, const size_t length_total)
   {
     String string = String(value);
-    stringPadLeft(string,total_length);
+    stringPadLeft(string,length_total);
     serial_ptr_->print(string);
   }
   template<typename T>
-  void printPadRight(const T value, const int total_length)
+  void printPadRight(const T value, const size_t length_total)
   {
     String string = String(value);
-    stringPadRight(string,total_length);
+    stringPadRight(string,length_total);
     serial_ptr_->print(string);
   }
   template<typename T>
@@ -61,8 +58,8 @@ class NewhavenDisplay {
   char getPaddingChar();
   void displayOn();
   void displayOff();
-  void setCursor(const int row, const int col);
-  void setCursor(const int pos);
+  void setCursor(const size_t row, const size_t col);
+  void setCursor(const size_t pos);
   void homeCursor();
   void underlineCursorOn();
   void underlineCursorOff();
@@ -72,9 +69,9 @@ class NewhavenDisplay {
   void blinkingCursorOff();
   void backspace();
   void clearScreen();
-  void setContrast(const int percent);
+  void setContrast(const size_t percent);
   void setContrastDefault();
-  void setBrightness(const int percent);
+  void setBrightness(const size_t percent);
   void setBrightnessDefault();
   void moveDisplayLeft();
   void moveDisplayRight();
@@ -85,8 +82,8 @@ class NewhavenDisplay {
 
  private:
   HardwareSerial *serial_ptr_;
-  const int row_count_;
-  const int col_count_;
+  const size_t row_count_;
+  const size_t col_count_;
   char padding_char_;
   const static int ROW_COUNT_DEFAULT = 4;
   const static int COL_COUNT_DEFAULT = 20;
@@ -99,9 +96,9 @@ class NewhavenDisplay {
   const static int CONTRAST_MIN = 1;
   const static int CONTRAST_MAX = 50;
   const static int CONTRAST_PERCENT_DEFAULT = 80;
-  void sendCmd(const int cmd);
-  void stringPadLeft(String &, const int length_total);
-  void stringPadRight(String &, const int length_total);
+  void sendCmd(const uint8_t cmd);
+  void stringPadLeft(String &, const size_t length_total);
+  void stringPadRight(String &, const size_t length_total);
 };
 
 

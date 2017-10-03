@@ -1,7 +1,8 @@
-#include "Arduino.h"
-#include "Streaming.h"
-#include "BetterMap.h"
-#include "NewhavenDisplay.h"
+#include <Arduino.h>
+#include <Streaming.h>
+#include <BetterMap.h>
+#include <NewhavenDisplay.h>
+
 
 NewhavenDisplay display = NewhavenDisplay(Serial3);
 char inputBuffer[128];
@@ -10,7 +11,7 @@ boolean inputComplete = false;
 char *argv[8];
 int arg1, arg2, arg3;
 
-const int BAUDRATE = 9600;
+const long BAUDRATE = 115200;
 
 void parse(char *line, char **argv, uint8_t maxArgs)
 {

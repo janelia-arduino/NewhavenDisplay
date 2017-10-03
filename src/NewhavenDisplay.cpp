@@ -7,6 +7,7 @@
 // ----------------------------------------------------------------------------
 #include "NewhavenDisplay.h"
 
+
 NewhavenDisplay::NewhavenDisplay(HardwareSerial &serial) :
   row_count_(ROW_COUNT_DEFAULT),
   col_count_(COL_COUNT_DEFAULT)
@@ -14,7 +15,7 @@ NewhavenDisplay::NewhavenDisplay(HardwareSerial &serial) :
   setSerial(serial);
 }
 
-NewhavenDisplay::NewhavenDisplay(HardwareSerial &serial, const int row_count, const int col_count) :
+NewhavenDisplay::NewhavenDisplay(HardwareSerial &serial, const size_t row_count, const size_t col_count) :
   row_count_(row_count),
   col_count_(col_count)
 {
@@ -58,7 +59,7 @@ void NewhavenDisplay::displayOff()
   sendCmd(0x42);
 }
 
-void NewhavenDisplay::setCursor(const int row, const int col)
+void NewhavenDisplay::setCursor(const size_t row, const size_t col)
 {
   int row_mod = row%row_count_;
   int col_mod = col%col_count_;
@@ -86,7 +87,7 @@ void NewhavenDisplay::setCursor(const int row, const int col)
   serial_ptr_->write(pos);
 }
 
-void NewhavenDisplay::setCursor(const int pos)
+void NewhavenDisplay::setCursor(const size_t pos)
 {
   int row = pos / col_count_;
   int col = pos % col_count_;
@@ -138,7 +139,7 @@ void NewhavenDisplay::clearScreen()
   sendCmd(0x51);
 }
 
-void NewhavenDisplay::setContrast(const int percent)
+void NewhavenDisplay::setContrast(const size_t percent)
 {
   int percent_checked = percent;
   if (percent_checked < PERCENT_MIN)
@@ -163,7 +164,7 @@ void NewhavenDisplay::setContrastDefault()
   setContrast(CONTRAST_PERCENT_DEFAULT);
 }
 
-void NewhavenDisplay::setBrightness(const int percent)
+void NewhavenDisplay::setBrightness(const size_t percent)
 {
   int percent_checked = percent;
   if (percent_checked < PERCENT_MIN)
@@ -218,14 +219,14 @@ int NewhavenDisplay::getColCount()
   return col_count_;
 }
 
-void NewhavenDisplay::sendCmd(const int cmd)
+void NewhavenDisplay::sendCmd(const uint8_t cmd)
 {
   // serial_ptr_->flush();
   serial_ptr_->write(0xFE);
   serial_ptr_->write(cmd);
 }
 
-void NewhavenDisplay::stringPadLeft(String &str, const int length_total)
+void NewhavenDisplay::stringPadLeft(String &str, const size_t length_total)
 {
   str.trim();
   if (str.length() > length_total)
@@ -239,7 +240,7 @@ void NewhavenDisplay::stringPadLeft(String &str, const int length_total)
   }
 }
 
-void NewhavenDisplay::stringPadRight(String &str, const int length_total)
+void NewhavenDisplay::stringPadRight(String &str, const size_t length_total)
 {
   str.trim();
   if (str.length() > length_total)
