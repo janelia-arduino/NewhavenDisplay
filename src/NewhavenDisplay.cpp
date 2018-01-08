@@ -30,7 +30,7 @@ void NewhavenDisplay::setSerial(HardwareSerial &serial)
 void NewhavenDisplay::setup()
 {
   resetDefaultPaddingChar();
-  serial_ptr_->begin(BAUDRATE);
+  serial_ptr_->begin(BAUD);
   setContrastDefault();
   setBrightnessDefault();
   clearScreen();

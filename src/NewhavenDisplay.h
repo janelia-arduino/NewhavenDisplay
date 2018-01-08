@@ -87,7 +87,7 @@ class NewhavenDisplay {
   char padding_char_;
   const static int ROW_COUNT_DEFAULT = 4;
   const static int COL_COUNT_DEFAULT = 20;
-  const static int BAUDRATE = 9600;
+  const static int BAUD = 9600;
   const static int PERCENT_MIN = 0;
   const static int PERCENT_MAX = 100;
   const static int BRIGHTNESS_MIN = 1;

@@ -11,7 +11,7 @@ boolean inputComplete = false;
 char *argv[8];
 int arg1, arg2, arg3;
 
-const long BAUDRATE = 115200;
+const long BAUD = 115200;
 
 void parse(char *line, char **argv, uint8_t maxArgs)
 {
@@ -40,7 +40,7 @@ void parse(char *line, char **argv, uint8_t maxArgs)
 void setup()
 {
   // PC communications
-  Serial.begin(BAUDRATE);
+  Serial.begin(BAUD);
   Serial.println("* System ready *");
 
   display.setup();
