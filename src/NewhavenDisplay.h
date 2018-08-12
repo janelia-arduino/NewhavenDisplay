@@ -5,7 +5,7 @@
 // modules.
 //
 // Authors:
-// Peter Polidoro polidorop@janelia.hhmi.org
+// Peter Polidoro peterpolidoro@gmail.com
 // ----------------------------------------------------------------------------
 #ifndef NEWHAVEN_DISPLAY_H
 #define NEWHAVEN_DISPLAY_H
