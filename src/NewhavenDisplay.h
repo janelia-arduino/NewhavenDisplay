@@ -17,9 +17,11 @@
 
 
 class NewhavenDisplay {
- public:
+public:
   NewhavenDisplay(HardwareSerial &serial);
-  NewhavenDisplay(HardwareSerial &serial, const size_t row_count, const size_t col_count);
+  NewhavenDisplay(HardwareSerial &serial,
+    size_t row_count,
+    size_t col_count);
   void setSerial(HardwareSerial &serial);
   void setup();
   template<typename T>
@@ -28,14 +30,16 @@ class NewhavenDisplay {
     serial_ptr_->print(value);
   }
   template<typename T>
-  void printPadLeft(const T value, const size_t length_total)
+  void printPadLeft(const T value,
+    size_t length_total)
   {
     String string = String(value);
     stringPadLeft(string,length_total);
     serial_ptr_->print(string);
   }
   template<typename T>
-  void printPadRight(const T value, const size_t length_total)
+  void printPadRight(const T value,
+    size_t length_total)
   {
     String string = String(value);
     stringPadRight(string,length_total);
@@ -58,8 +62,9 @@ class NewhavenDisplay {
   char getPaddingChar();
   void displayOn();
   void displayOff();
-  void setCursor(const size_t row, const size_t col);
-  void setCursor(const size_t pos);
+  void setCursor(size_t row,
+    size_t col);
+  void setCursor(size_t pos);
   void homeCursor();
   void underlineCursorOn();
   void underlineCursorOff();
@@ -69,9 +74,9 @@ class NewhavenDisplay {
   void blinkingCursorOff();
   void backspace();
   void clearScreen();
-  void setContrast(const size_t percent);
+  void setContrast(size_t percent);
   void setContrastDefault();
-  void setBrightness(const size_t percent);
+  void setBrightness(size_t percent);
   void setBrightnessDefault();
   void moveDisplayLeft();
   void moveDisplayRight();
@@ -80,7 +85,7 @@ class NewhavenDisplay {
   int getRowCount();
   int getColCount();
 
- private:
+private:
   HardwareSerial *serial_ptr_;
   const size_t row_count_;
   const size_t col_count_;
@@ -96,9 +101,11 @@ class NewhavenDisplay {
   const static int CONTRAST_MIN = 1;
   const static int CONTRAST_MAX = 50;
   const static int CONTRAST_PERCENT_DEFAULT = 80;
-  void sendCmd(const uint8_t cmd);
-  void stringPadLeft(String &, const size_t length_total);
-  void stringPadRight(String &, const size_t length_total);
+  void sendCmd(uint8_t cmd);
+  void stringPadLeft(String &,
+    size_t length_total);
+  void stringPadRight(String &,
+    size_t length_total);
 };
 
 

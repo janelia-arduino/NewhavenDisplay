@@ -9,15 +9,17 @@
 
 
 NewhavenDisplay::NewhavenDisplay(HardwareSerial &serial) :
-  row_count_(ROW_COUNT_DEFAULT),
-  col_count_(COL_COUNT_DEFAULT)
+row_count_(ROW_COUNT_DEFAULT),
+col_count_(COL_COUNT_DEFAULT)
 {
   setSerial(serial);
 }
 
-NewhavenDisplay::NewhavenDisplay(HardwareSerial &serial, const size_t row_count, const size_t col_count) :
-  row_count_(row_count),
-  col_count_(col_count)
+NewhavenDisplay::NewhavenDisplay(HardwareSerial &serial,
+  size_t row_count,
+  size_t col_count) :
+row_count_(row_count),
+col_count_(col_count)
 {
   setSerial(serial);
 }
@@ -59,7 +61,8 @@ void NewhavenDisplay::displayOff()
   sendCmd(0x42);
 }
 
-void NewhavenDisplay::setCursor(const size_t row, const size_t col)
+void NewhavenDisplay::setCursor(size_t row,
+  size_t col)
 {
   int row_mod = row%row_count_;
   int col_mod = col%col_count_;
@@ -87,7 +90,7 @@ void NewhavenDisplay::setCursor(const size_t row, const size_t col)
   serial_ptr_->write(pos);
 }
 
-void NewhavenDisplay::setCursor(const size_t pos)
+void NewhavenDisplay::setCursor(size_t pos)
 {
   int row = pos / col_count_;
   int col = pos % col_count_;
@@ -139,7 +142,7 @@ void NewhavenDisplay::clearScreen()
   sendCmd(0x51);
 }
 
-void NewhavenDisplay::setContrast(const size_t percent)
+void NewhavenDisplay::setContrast(size_t percent)
 {
   int percent_checked = percent;
   if (percent_checked < PERCENT_MIN)
@@ -151,10 +154,10 @@ void NewhavenDisplay::setContrast(const size_t percent)
     percent_checked = PERCENT_MAX;
   }
   uint8_t contrast = betterMap(percent_checked,
-                               PERCENT_MIN,
-                               PERCENT_MAX,
-                               CONTRAST_MIN,
-                               CONTRAST_MAX);
+    PERCENT_MIN,
+    PERCENT_MAX,
+    CONTRAST_MIN,
+    CONTRAST_MAX);
   sendCmd(0x52);
   serial_ptr_->write(contrast);
 }
@@ -164,7 +167,7 @@ void NewhavenDisplay::setContrastDefault()
   setContrast(CONTRAST_PERCENT_DEFAULT);
 }
 
-void NewhavenDisplay::setBrightness(const size_t percent)
+void NewhavenDisplay::setBrightness(size_t percent)
 {
   int percent_checked = percent;
   if (percent_checked < PERCENT_MIN)
@@ -176,10 +179,10 @@ void NewhavenDisplay::setBrightness(const size_t percent)
     percent_checked = PERCENT_MAX;
   }
   uint8_t brightness = betterMap(percent_checked,
-                                 PERCENT_MIN,
-                                 PERCENT_MAX,
-                                 BRIGHTNESS_MIN,
-                                 BRIGHTNESS_MAX);
+    PERCENT_MIN,
+    PERCENT_MAX,
+    BRIGHTNESS_MIN,
+    BRIGHTNESS_MAX);
   sendCmd(0x53);
   serial_ptr_->write(brightness);
 }
@@ -219,14 +222,15 @@ int NewhavenDisplay::getColCount()
   return col_count_;
 }
 
-void NewhavenDisplay::sendCmd(const uint8_t cmd)
+void NewhavenDisplay::sendCmd(uint8_t cmd)
 {
   // serial_ptr_->flush();
   serial_ptr_->write(0xFE);
   serial_ptr_->write(cmd);
 }
 
-void NewhavenDisplay::stringPadLeft(String &str, const size_t length_total)
+void NewhavenDisplay::stringPadLeft(String &str,
+  size_t length_total)
 {
   str.trim();
   if (str.length() > length_total)
@@ -240,7 +244,8 @@ void NewhavenDisplay::stringPadLeft(String &str, const size_t length_total)
   }
 }
 
-void NewhavenDisplay::stringPadRight(String &str, const size_t length_total)
+void NewhavenDisplay::stringPadRight(String &str,
+  size_t length_total)
 {
   str.trim();
   if (str.length() > length_total)
