@@ -5,7 +5,7 @@
 // modules.
 //
 // Authors:
-// Peter Polidoro peterpolidoro@gmail.com
+// Peter Polidoro peter@polidoro.io
 // ----------------------------------------------------------------------------
 #ifndef NEWHAVEN_DISPLAY_H
 #define NEWHAVEN_DISPLAY_H
